@@ -1,0 +1,54 @@
+MODAL WINDOW PROJECT KEY TAKEAWAYs
+
+-Always have a plan before starting and desing your html with sensible class names for ones that you are certain to target in JS
+-Use CSS properties for each class in more logical order make use of hidden  class as this is second class name with a space between the 1st and 2nd
+-Use backdrop-filter blur(3px and with opaque color so it will blur the background after z-index takes an effect. 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px); /* this is also important effect */
+  z-index: 5;
+}
+
+
+ 
+
+1- capture repeating document selectors to a VARIABLE to use over and over again with shorter but concise name; e.g:
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
+const btnOpenModal = document.querySelectorAll('.show-modal');
+const btnCloseModal = document.querySelector('.close-modal');
+
+2- use FOR LOOP for each buttons if they open the same modal if not: DO RESEARCH but it seems go each button individually assing eventlistener
+for (let i = 0; i < btnOpenModal.length; i++)
+  btnOpenModal[i].addEventListener('click', openModal); // we dont call but jus declare openModal function because click event will call this function.
+
+3-Add eventlistener for click to grab event and declare function in which use document.classList.add or remove('.className') ; then repeat this for other actions to happen you want
+
+4- hidden class CSS shoud be display none 
+
+5- capture repeating document. expressions to a variable and function to use in repeating occurances for DRY code!
+const openModal = function () {
+  modal.classList.remove('hidden'); // dont use .  dot is for selector only!! we will remove hidden class  to show modal
+  overlay.classList.remove('hidden');
+
+6: now we need to manupulate keyboard interactions !!! we need to listen keyboard events.
+// keyboard events are global and keydown, keyup - when you lift finger from any key - keypressed
+// when key pressed and event happens and JS creates an object and then we handle that event object that s why we define a function that will called upon an event.
+// e stands for anything it could be anything.
+
+  document.addEventListener('keydown', function (e) {
+  console.log('e.key'); // this function will create an event with e .key
+
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    //if (!modal.classList.contains('hidden')) >>> this goes up to 1 line above!!
+    // ! makes modal.classList.contains('hidden') = false so it means modal class is not hidden .it measns if it is actually visible.!!
+    closeModal();
+  }
+});
+
+
